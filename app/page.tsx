@@ -4,14 +4,15 @@ export default function Page() {
   return (
     <section>
       <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
-        My Portfolio
+        About this space
       </h1>
       <p className="mb-4">
-        {`I'm a Vim enthusiast and tab advocate, finding unmatched efficiency in
-        Vim's keystroke commands and tabs' flexibility for personal viewing
-        preferences. This extends to my support for static typing, where its
-        early error detection ensures cleaner code, and my preference for dark
-        mode, which eases long coding sessions by reducing eye strain.`}
+        {`Hello World! I’m Nathan — an engineering leader, writer, and systems thinker exploring how humans and
+          technology collaborate. This space is where I explore that intersection: how technology can empower rather
+          than replace, and how empathy, structure, and design shape the way we work with intelligent systems.
+          Over the past decade, I’ve led high-performing teams through major transformations in service and support,
+          focusing on building frameworks where people and technology complement each other — automation that empowers,
+          AI that assists with empathy, and teams that thrive sustainably.`}
       </p>
       <div className="my-8">
         <BlogPosts />
