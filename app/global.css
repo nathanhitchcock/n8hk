@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+html {
+  font-family: var(--font-sans);
+}
+
 ::selection {
   background-color: #47a3f3;
   color: #fefefe;
@@ -121,6 +125,16 @@ html {
   margin-bottom: 1.25em !important;
 }
 
+.prose {
+  font-family: var(--font-sans);
+}
+
+.prose code,
+.prose pre,
+.callout-title {
+  font-family: var(--font-mono);
+}
+
 pre::-webkit-scrollbar {
   display: none;
 }
@@ -147,4 +161,33 @@ table {
 
 .title {
   text-wrap: balance;
+}
+
+/* Annotation / note callout */
+.callout {
+  background: #2e2f30;
+  border-left: 3px solid #5b2a77;
+  color: #e6e7e9;
+  padding: 1rem 1.25rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.callout-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #78339f;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+}
+
+.callout code {
+  background: rgba(255,255,255,0.06);
+  padding: 0.15rem 0.3rem;
+  border-radius: 4px;
 }

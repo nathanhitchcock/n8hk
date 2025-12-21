@@ -1,0 +1,348 @@
+---
+title: 'Staffing Isn’t About Headcount'
+publishedAt: "2025-12-19"
+summary: "It’s about protecting the flow, planning for burst capacity, and being honest about operational risk."
+---
+# Not About Headcount
+
+As the year winds down, I’ve been taking a hard look at how our support team is really operating - beyond the metrics we report and the dashboards we rely on.
+
+I’ve spent a lot of time lately reviewing capacity and utilization as I plan for next year. Somewhere in that process, I started to notice a disconnect between how efficient we looked on paper and how the work actually felt day to day. That gap stuck with me, and it’s reshaping how I think about staffing, escalation, and operational risk. It’s what I want to unpack here.
+
+On the surface, things looked good:
+- Utilization is high  
+- Backlog looks *manageable*  
+- Everyone is busy  
+- No one is idle  
+
+If you’re scanning a dashboard, it’s easy to feel reassured, and I felt it too.
+
+Part of why these patterns became obvious this year is that our team has been going through a deliberate shift in how we operate. We moved from an operations-heavy, interrupt-driven model, to a support-first focus. A model where flow, prioritization, and consistency matter more than our individual heroics.
+
+Living through that transition forced me to look at our metrics and staffing assumptions differently. Practices that made sense in an operational context (direct escalation paths, urgency signaling, and constant reprioritization) started to break down when the support queue becomes the primary system of record. Watching that shift up close changed how I think about efficiency, escalations, and what “good” actually looks like in our support organization.
+
+Because here’s the thing...On paper, we looked really efficient. But when you sit with the work (or talk to the engineers doing it) something still felt off:
+- Engineers were constantly context-switching
+- Small issues lingered because there was never enough time to *close the loop*  
+- Every new “urgent” request reshuffled the priority queue  
+- Customers started asking for escalations because things felt slower, not faster  
+
+Nothing was obviously broken and our team wasn’t failing - it was just *working too hard*.
+
+This is what **fake efficiency** looks like: a system that appears productive while quietly losing its ability to respond when it matters most. Most organizations don’t notice this until an incident, a customer loss, or burnout forces the issue.
+
+---
+
+## Protect the Flow
+
+Most organizations think about staffing the same way they think about budgets:
+> “How many people do we need to handle the work?”
+
+That framing sounds reasonable. It’s also incomplete. In support organizations, it’s often the reason things quietly start to fail.
+
+The real question isn’t *how many people do we have*?  
+It’s *how much risk are we carrying*, and where does that risk show up when demand spikes?
+
+What surprised me most was realizing how often we were “almost fine.”  
+Almost meeting response targets.  
+Almost keeping the backlog flat.  
+Almost staying ahead of the queue.
+
+That constant state of “almost” doesn’t show up cleanly in dashboards - but it’s exhausting for a team.
+
+---
+
+## “Efficient” Teams
+
+Support teams are often staffed to look efficient on paper:
+- high utilization  
+- minimal idle time  
+- tight headcount  
+- clean cost-per-ticket metrics  
+
+I’ll be honest -  when I first saw those numbers improving, my instinct was relief. It felt like we were finally doing something right as we made our organizational shift. 
+
+But the moment a support team *looks* efficient, it usually stops working well.
+
+Support work doesn’t arrive smoothly. It arrives in bursts: incidents, launches, last-minute changes before holidays, and urgent questions that can’t wait. When a team is already running near capacity, those bursts don’t get absorbed -- they ripple outward. Queues grow. Response times slow. Escalations increase. Engineers context-switch. Burnout follows.
+
+The system looks busy, but outcomes get worse.
+
+What I learned is that above a certain point (usually around 70–75% sustained load) support teams don’t become more productive. They become noisier. Resolution times lengthen. Backlogs age. Rework increases. Managers intervene more.
+
+Ironically, the team is working harder and finishing less work.
+
+This isn’t a people problem. It’s a systems problem.
+
+---
+
+## Systems Thinking Detour
+
+In operations theory, there’s a concept called the **Theory of Constraints**.
+
+The idea is simple:
+- every system has a bottleneck  
+- the bottleneck determines total throughput  
+- if you overload or constantly interrupt the bottleneck, the entire system slows down 
+
+That's it. That's the whole book and concept in 3 sentences - now go design efficient systems :)
+
+For our case, support became the bottleneck the moment we shifted to a support-first model - whether we wanted to admit it or not. Suddenly we were the front door and intake for all requests, and the ticket volumes exploded with the renewed focus and new customers signing up.
+
+The fastest way to degrade performance is to let unplanned work interrupt that constraint at will.
+
+Which brings us to escalations...
+
+---
+
+## “Just Escalate It”
+
+Escalation *feels* helpful. Customers feel heard. Account teams feel reassured. Leaders feel responsive.
+
+But escalation is not free.
+
+Every escalation:
+- interrupts planned work  
+- reshuffles priorities  
+- increases context switching  
+- pulls senior engineers and managers into triage mode
+
+I’ll admit - several customers and internal leaders asked for this early on, and at one point I considered reintroducing a customer-facing escalation path. On paper, it made sense. Click a button to escalate your issues, and it makes people feel heard immediately. 
+
+In practice, it would have guaranteed that the loudest issues, not the most severe ones, dominated our time. Our systems are set up for severity and priority based queuing, so the most urgent tickets are triaged and reviewed first. Engineers pick off the top for the next ticket, and the overall system runs efficiently as long as everyone is in flow. If we allow escalations to reorder our planned work it causes the loudest customers to be heard almost exclusively. This isn't fair to the customers who respect the system we've set up.
+
+A useful analogy I’ve been using lately:
+
+**Escalations are like bypassing the triage desk at an emergency room.**
+
+In an ER, urgency isn’t determined by who is most uncomfortable or who demands attention the loudest. It’s assessed by trained staff, based on severity and impact. If every patient could skip triage and insist on being seen next, the system would quickly lose the ability to respond to real emergencies.
+Support teams behave the same way under load.
+
+When escalation is self-initiated, priority shifts from severity to persistence. Signal quality degrades. Noise increases. And genuinely critical issues wait longer -- not because the team isn’t capable, but because the system can no longer distinguish urgency from volume.
+I’m proud of how quickly our team responds to real incidents. That only works because escalation is controlled.
+
+*Escalation is a control mechanism for protecting the system, not a convenience feature.*
+
+---
+
+### Customer-Initiated Escalations
+
+This is where systems thinking becomes a policy decision.
+
+When a support team is small or operating near capacity, allowing customer-initiated escalations creates a distortion in the system. Escalations stop being a signal of severity and become a signal of persistence. The customers who escalate aren’t necessarily the ones with the most severe issues. They’re the ones with the time, confidence, or organizational leverage to push harder. In a constrained system, that pressure reshapes priorities.
+
+*Instead of work flowing toward the highest-impact problems, it flows toward the loudest ones.*
+
+In practice, customer-initiated escalations can:
+- increase noise  
+- favor loud over severe  
+- degrades signal quality
+- slows resolution for the most critical issues  
+
+That doesn’t serve customers in the long run, especially the ones who need help the most.
+
+Instead, escalation decisions need to be:
+- internal  
+- severity-based  
+- impact-driven  
+- reviewed by people trained to protect flow  
+
+This isn’t about saying “no.” It’s about making sure the right problems get solved first.
+
+This doesn’t mean escalations are never appropriate.
+
+In larger organizations - or in teams with dedicated escalation engineers (clear triage roles and sufficient buffer) customer-initiated escalations can be absorbed without distorting flow. The system has enough structure to separate urgency from volume.
+But that only works once the system is built to support it. 
+
+*Until then, escalation policy isn’t about access or responsiveness; it’s about protecting throughput when capacity is constrained.*
+
+---
+
+## Capacity, Pressure, and Risk
+
+For a long time, I kept trying to collapse staffing conversations into a single number. One utilization target. One capacity model. One answer.
+
+What I eventually realized is that I was mixing three different things together -- and treating them as if they were the same:
+1. **Capacity**: how much work the team can handle sustainably  
+2. **Pressure**: how often demand exceeds that capacity  
+3. **Risk**: how severe the peaks are when it does
+
+When you average them together, you lose the only part that actually hurts.
+
+This is the part where the data nerds (myself included) need to be careful. You can be “fine on average” and still fail customers during the peak weeks that shape your reputation. Unused capacity in slow periods doesn’t offset overload in busy ones. You can’t bank the hours. *The pain always shows up at the peak.*
+
+This is why staffing purely off averages leads to surprises in practice.
+
+If a team averages 80% utilization over a month, that sounds healthy.  
+But if two weeks ran at 60% and two weeks ran at 100%+, the average hides the risk entirely.
+
+![Average vs Peak Load](/blog/operational-risk/average-vs-peak-load.png)
+
+Support systems fail at the peaks, not the mean.
+
+That’s why I now look at:
+- average monthly load
+- **peak month load**
+- and worst sustained overage
+
+The peak tells you where the system actually breaks.
+
+---
+
+## Max Sustainable Capacity
+
+One thing that helped ground these conversations for me was getting very explicit about what “capacity” actually means in practice. A common mistake (one I’ve made myself) is starting from a theoretical maximum:
+```
+40 hours a week × 52 weeks a year × headcount
+```
+
+That number looks comforting. It's nice and clean. It’s also fictional.
+
+In reality, engineers don’t spend all of their time on ticket work. There’s:
+- PTO & sick leave
+- unexpected life events
+- meetings
+- incident follow-ups
+- internal coordination
+- context switching
+- onboarding and training
+- documentation and improvement work
+
+So instead of asking “how many hours *existed* in the year” I started asking:
+> “How many hours can we sustainably spend on tickets without degrading the overall system?”
+
+Here’s the model I’ve been using.
+
+### Step 1: Start with realistic annual availability
+
+A rough but honest baseline per engineer:
+```
+~1,660 maximum available working hours per year (after overhead listed above)
+```
+
+From there, I assume a **sustainable utilization target**, not the maximum value:
+```
+~65% == high-quality sustainable support work
+```
+
+That gives us:
+```
+1,660 × 0.65 ≈ 1,079 hours per engineer per year
+```
+
+That 1,079 hours is not a goal: it’s a **guardrail**.
+
+#### why 65%?
+> The ~65% figure isn’t “taking a percentage of a percentage.” It’s separating two different concepts. The ~1,660 hours reflects **maximum availability**: when someone is actually at work over the course of a year. The ~65% reflects the **sustainable load**: how much reactive, interrupt-driven ticket work the system can absorb before flow breaks down.
+>
+> That remaining time isn’t idle. It’s meetings, coordination, documentation, recovery, improvement work, and the unavoidable overhead of doing the job well over time. Without accounting for this work type, engineers will bounce from ticket to ticket without being able to improve the overall system. Over time, this erodes the quality output capability of support.
+
+### Step 2: Convert to monthly sustainable capacity
+
+For planning and spikes, I convert that annual number into a monthly view:
+
+```
+1,079 ÷ 12 ≈ 90 hours per engineer per month
+```
+
+So for a team of _N_ engineers:
+
+```
+Monthly Sustainable Capacity ≈ 90 × N (engineer-hours)
+```
+
+That’s the amount of ticket work the system can absorb *without* accumulating hidden risk.
+
+### Step 3: Compare demand to capacity (not averages)
+
+Once I had that number, a few things became obvious very quickly. If monthly ticket hours consistently exceed sustainable capacity:
+- backlog may still look “manageable”
+- utilization may still look “healthy”
+- but pressure and risk are accumulating every month
+
+<Callout>*importantly: Unused capacity in quiet months does not cancel out overload in busy ones.*</Callout>
+
+**You can’t bank hours.**
+
+Support capacity doesn’t work like a savings account. It works more like an emergency room.
+An ER that’s quiet on Monday doesn’t get to use that unused capacity when the ambulances line up on Friday. The doctors can't work ahead on cases that haven't arrived yet. The beds don’t carry forward. When demand exceeds capacity, patients wait -- and the consequences compound.
+Support behaves the same way. When demand exceeds capacity, the work doesn’t disappear. It stacks up. Queues grow, response times slip, and the system enters a recovery mode that often lasts longer than the surge that caused it.
+
+That’s why I stopped looking only at averages and started paying attention to:
+- peak months
+- sustained overages
+- and worst-case scenarios
+
+Those are the moments that actually define the overall customer experience.
+
+
+
+---
+
+## Better Staffing Conversations
+
+Better staffing discussions don’t start with: “Do we need to hire more people?”
+
+They start with different questions entirely:
+- “What level of operational risk are we comfortable carrying?”  
+- “What happens during peak demand?”  
+- “Where does the system break first?”  
+- “What signals tell us it’s time to act?”  
+
+Once those questions are on the table, the options become clearer:
+- hire more capacity  
+- reduce scope  
+- invest in deflection  
+- accept risk explicitly  
+
+The key difference is that the tradeoff is **intentional**, not accidental.
+
+Slack and buffer time in support isn’t waste -- it’s operational insurance.
+
+### A quick primer on talking to Finance (from someone who had to learn)
+
+One thing I’ve learned the hard way is that these conversations often stall not because Finance disagrees, but because we’re speaking different languages.
+
+Finance is doing their job when they ask:
+- “Why is cost per ticket increasing?”
+- “Why can’t we run this leaner?”
+- “Why do we need capacity we’re not fully utilizing?”
+
+Those are reasonable questions. Where things go wrong is when staffing discussions turn into headcount debates instead of risk conversations.
+
+What changed for me was reframing the conversation away from *efficiency* and toward *exposure*.
+
+Instead of saying: “We need more people.”
+
+I started saying things like:
+- “Here’s the operational risk we’re carrying during peak months.”  
+- “Here’s what happens when demand exceeds sustainable capacity.”  
+- “Here’s how long it takes the system to recover after a spike.”  
+- “Here are the levers we can pull -- and the tradeoffs for each.”  
+
+That framing lands differently.
+
+Finance (and other leadership) don't need ticket math. They understand risk, variability, and downside scenarios. When staffing is positioned as risk management rather than headcount justification, alignment gets much easier.
+
+<Callout>The hardest part of this conversation isn’t the numbers. It’s being explicit about the risk we’re choosing to carry, and being willing to own and accept that decision.</Callout>
+
+Once that’s clear, the discussion becomes collaborative instead of adversarial.
+
+---
+
+## The Mindset Shift
+
+The goal of a support organization is not to look efficient. It’s to resolve the most important problems as fast as possible.
+
+What's highlighted for me in recent years is realizing that reliability doesn’t come from squeezing more work out of the system. It comes from protecting the system itself.
+
+- Protecting the constraint: our people.  
+- Preserving the signal: the prioritized backlog.
+- And allowing for slack and buffer where it actually matters.
+
+Those things can feel uncomfortable on a dashboard. They can look like inefficiency if you’re only scanning averages. But in practice, that's what makes a support system resilient instead of fragile.
+
+If everyone can bypass triage, the system loses its ability to recognize real emergencies.
+
+And in support, clarity beats comfort every time -- even when that clarity forces harder conversations.
+

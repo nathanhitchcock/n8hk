@@ -1,12 +1,27 @@
 import './global.css'
 import type { Metadata } from 'next'
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
+import type { ReactNode } from 'react'
+import { Inter, IBM_Plex_Mono } from 'next/font/google'
 import { Navbar } from './components/nav'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import Footer from './components/footer'
 import { baseUrl } from './sitemap'
+import { Container } from 'app/components/container'
+
+/* Fonts */
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap',
+})
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-mono',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -38,27 +53,37 @@ export const metadata: Metadata = {
   },
 }
 
-const cx = (...classes) => classes.filter(Boolean).join(' ')
+const cx = (...classes: string[]) => classes.filter(Boolean).join(' ')
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
       className={cx(
         'text-black bg-white dark:text-white dark:bg-black',
-        GeistSans.variable,
-        GeistMono.variable
+        inter.variable,
+        plexMono.variable
       )}
     >
-      <body className="antialiased max-w-xl mx-4 mt-8 lg:mx-auto">
-        <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
-          <Navbar />
+      <body className="antialiased mx-4 mt-8 lg:mx-auto">
+        <main className="flex-auto min-w-0 mt-6 flex flex-col">
+          {/* Nav (always wide) */}
+          <Container size="wide" className="w-full">
+            <div className="border-b border-neutral-200/80 dark:border-neutral-700/70 pb-4 mb-8">
+              <Navbar />
+            </div>
+          </Container>
+
+          {/* Page content (each page decides narrow/wide) */}
           {children}
-          <Footer />
+
+          {/* Footer (always wide) */}
+          <Container size="wide" className="w-full">
+            <div className="mt-12">
+              <Footer />
+            </div>
+          </Container>
+
           <Analytics />
           <SpeedInsights />
         </main>
