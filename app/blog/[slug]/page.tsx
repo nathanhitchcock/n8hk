@@ -4,6 +4,9 @@ import { formatDate, getBlogPosts } from 'app/blog/utils'
 import { baseUrl } from 'app/sitemap'
 import { TableOfContents } from 'app/components/toc'
 import { Container } from 'app/components/container'
+// no React.use needed; prefer async/await for Promise params
+
+type Params = { slug: string }
 
 
 export async function generateStaticParams() {
@@ -14,8 +17,10 @@ export async function generateStaticParams() {
   }))
 }
 
-export function generateMetadata({ params }) {
-  let post = getBlogPosts().find((post) => post.slug === params.slug)
+export async function generateMetadata({ params }: { params: Params | Promise<Params> }) {
+  // In Next 15+, dynamic params may be a Promise; unwrap before use
+  const { slug } = await params
+  let post = getBlogPosts().find((post) => post.slug === slug)
   if (!post) {
     return
   }
@@ -54,8 +59,10 @@ export function generateMetadata({ params }) {
   }
 }
 
-export default function Blog({ params }) {
-  let post = getBlogPosts().find((post) => post.slug === params.slug)
+export default async function Blog({ params }: { params: Params | Promise<Params> }) {
+  // In Next 15+, dynamic params may be a Promise; unwrap before use
+  const { slug } = await params
+  let post = getBlogPosts().find((post) => post.slug === slug)
 
   if (!post) {
     notFound()
