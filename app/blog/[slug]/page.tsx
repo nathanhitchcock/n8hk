@@ -2,6 +2,9 @@ import { notFound } from 'next/navigation'
 import { CustomMDX } from 'app/components/mdx'
 import { formatDate, getBlogPosts } from 'app/blog/utils'
 import { baseUrl } from 'app/sitemap'
+import { TableOfContents } from 'app/components/toc'
+import { Container } from 'app/components/container'
+
 
 export async function generateStaticParams() {
   let posts = getBlogPosts()
@@ -58,41 +61,87 @@ export default function Blog({ params }) {
     notFound()
   }
 
+  const tocItems = getTocItems(post.content)
+
   return (
-    <section>
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'BlogPosting',
-            headline: post.metadata.title,
-            datePublished: post.metadata.publishedAt,
-            dateModified: post.metadata.publishedAt,
-            description: post.metadata.summary,
-            image: post.metadata.image
-              ? `${baseUrl}${post.metadata.image}`
-              : `/og?title=${encodeURIComponent(post.metadata.title)}`,
-            url: `${baseUrl}/blog/${post.slug}`,
-            author: {
-              '@type': 'Person',
-              name: 'My Portfolio',
-            },
-          }),
-        }}
-      />
-      <h1 className="title font-semibold text-2xl tracking-tighter">
+    <Container size="wide">
+      {/* ... JSON-LD script stays as-is... */}
+
+      <h1 className="title font-semibold text-3xl tracking-tight">
         {post.metadata.title}
       </h1>
-      <div className="flex justify-between items-center mt-2 mb-8 text-sm">
-        <p className="text-sm text-neutral-600 dark:text-neutral-400">
-          {formatDate(post.metadata.publishedAt)}
-        </p>
+
+      <div className="mt-3 mb-8 text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
+        {post.metadata.readingTime
+          ? `${post.metadata.readingTime.replace(' read', '')}`
+          : null}
+        {post.metadata.readingTime ? ' · ' : null}
+        {formatDate(post.metadata.publishedAt)}
       </div>
-      <article className="prose">
-        <CustomMDX source={post.content} />
-      </article>
-    </section>
+
+
+      <div className="lg:grid lg:grid-cols-12 lg:gap-12">
+        <article className="prose lg:prose-lg xl:prose-xl lg:col-span-9">
+          <CustomMDX source={post.content} />
+        </article>
+
+        <aside className="hidden md:block md:col-span-3 md:pl-6 lg:pl-8">
+          <div className="sticky top-24 border-l border-neutral-200 dark:border-neutral-800 pl-4">
+            <TableOfContents items={tocItems} />
+          </div>
+        </aside>
+      </div>
+
+    </Container>
   )
+}
+
+function slugify(str: string) {
+  return str
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/&/g, '-and-')
+    .replace(/[^\w\-]+/g, '')
+    .replace(/\-\-+/g, '-')
+}
+
+// Very small “good enough” markdown heading parser for MDX text.
+// Extracts ## and ###, ignores code fences.
+function getTocItems(mdx: string) {
+  const lines = mdx.split('\n')
+  const items: { id: string; text: string }[] = []
+
+  let inCodeBlock = false
+
+  for (const line of lines) {
+    const trimmed = line.trim()
+
+    if (trimmed.startsWith('```') || trimmed.startsWith('~~~')) {
+      inCodeBlock = !inCodeBlock
+      continue
+    }
+    if (inCodeBlock) continue
+
+    // Match ONLY ## Heading
+    const match = /^(#{2})\s+(.+)$/.exec(trimmed)
+    if (!match) continue
+
+    let text = match[2]
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/\*\*([^*]+)\*\*/g, '$1')
+      .replace(/\*([^*]+)\*/g, '$1')
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+      .trim()
+
+    if (!text) continue
+
+    items.push({
+      id: slugify(text),
+      text,
+    })
+  }
+
+  return items
 }

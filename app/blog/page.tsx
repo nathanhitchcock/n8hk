@@ -1,4 +1,5 @@
 import { BlogPosts } from 'app/components/posts'
+import { Container } from 'app/components/container'
 
 export const metadata = {
   title: 'Blog',
@@ -7,9 +8,9 @@ export const metadata = {
 
 export default function Page() {
   return (
-    <section>
+    <Container size="narrow">
       <h1 className="font-semibold text-2xl mb-8 tracking-tighter">My Blog</h1>
       <BlogPosts />
-    </section>
+    </Container>
   )
 }
