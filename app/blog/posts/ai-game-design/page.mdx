@@ -1,0 +1,151 @@
+---
+title: "AI in Game Design"
+publishedAt: "2025-12-26"
+summary: "Exploring how AI can augment and inspire game design through systems, iteration, and feedback loops."
+status: "Published"
+---
+
+# The Intention
+
+A few months ago, I built a small, playable game about burnout.
+
+I’m not a game developer by trade. I don’t come from a formal game design background, and before this project I hadn’t touched a game engine. What I *do* have is a long career designing systems (ie: breaking them) and an even longer history of playing video games since I was a kid. My first computer was a [Commodore64]; where you add to enter an entire execution line to run the game program inside of the machine, and the games came in these big clunky cartridges -- it was a glorious time to be alive!
+
+In hindsight, that combination of gamer and system engineer is exactly why this project worked out as good as it did --at least for a while.
+
+This isn’t a post about “how AI built a game for me” or “AI makes game design easy.” That framing is optimized for clicks, not clarity. Instead, I want to reflect on my first real attempt at using AI for a greenfield creative project, rather than integrating it into an existing platform or dataset. I use AI regularly in my day job and have spent the past couple of years watching its capabilities evolve, testing what it does well and where it breaks down. Building a game surfaced those boundaries in a way that was both practical and unexpectedly personal -— and it has since influenced how I think about using AI systems design at work.
+
+Let me start by saying - AI is fantastic. What it does well it does very well. Need a summary of a 67 comment ticket thread? AI's got you. But that same summarization leverage came with a downside I didn’t anticipate until I was deep into the project. At a certain point, using AI *too effectively* made me feel disconnected from the creative work itself. Counterintuitively, that’s what ultimately led me to shelve the project.
+
+Both things can be true at once.
+
+---
+
+## The Learning-Latency Problem
+
+I’ve never had a shortage of ideas for games -- my bottleneck is never ideation. For me it's always in focus and execution,the hard stuff, constrained by the limited time and attention I was willing to give myself. More specifically, my bottleneck was the **latency between intent and feedback**.
+
+Traditional learning paths for game development have a long warm-up phases: toolchain selection, engine onboarding, asset pipelines, scripting paradigms, and architectural best practices often requires significant upfront investment before you can produce anything tangible. I felt that friction early. In college, I seriously considered going into game design, but ultimately chose network engineering (called network administration back then) because it felt like the responsible path. I craved stability, and my goal was simple: never worry about paying bills. Creative paths —- being a movie director, a game designer, a writer, or a photographer felt exciting, but they also felt too risky. I didn't have a safety net. The game developers I knew in the early 2000s were all in California, and the idea of uprooting myself after growing up in the same town my entire life was intimidating. Stability won. In hindsight, it was a rational choice but it also meant creative ideas stayed theoretical for a long time.
+
+<Callout>
+## Quick aside on Flow States
+Looking back, I realize I *did* experience flow states in college in my early programming classes. I’ve always loved puzzles, and programming is full of them. This was before “flow state” was something people talked about explicitly. All I knew was that it was Thursday when I started working on a problem, and suddenly it was Sunday night when I looked up. At the time, I misinterpreted that experience and assumed that I was struggling because I wasn’t smart enough or didn’t fully understand the material, rather than recognizing it as a signal that I was deeply engaged. Instead of leaning into that part of who I am, I moved away from it. If I were to have another college playthrough, I would have jumped into game development with both feet -- since it uniquely combines programming and storytelling in a way that fits how my brain works.
+</Callout>
+
+But back to learning game development. By the time you’re “ready” to start building a game using traditional paths, you’ve often burned through the creative energy that motivated the project in the first place. What AI changed for me wasn’t gaining more competence or brute-forcing activation energy -- it was dramatically reducing the **time-to-first-feedback** on my ideas and seeing that affect on the computer screen. Instead of spending days figuring out how to do something “correctly,” I could prototype something *incorrect but working* in minutes, observe the results, and iterate again and again.
+
+That reduction in latency matters enormously in inital systems design.
+
+
+
+
+---
+## The Core Loop
+
+From the beginning, I treated the game less like a narrative artifact and more like a **system under load**. The initial mechanics were intentionally simple: a single box representing the player character with a small health bar. Incoming waves of “stress” would hit the character and deplete that health. The core concept was deliberately minimal, and layering new mechanics on top of it was part of the fun. I designed largely in “this would be cool” mode —- by far not the most efficient approach, but the most enjoyable while in early phases of learning.
+
+In effect, my game became a closed system defined by pressure, capacity, and decay. That framing allowed me to lean on intuition I already had from building operational systems: stress accumulation versus recovery rate, burst load versus sustained load, diminishing returns, failure thresholds, and player choice under constraint. I didn't actively think in those terms in the moment, but it's how I've forced my brain to work -- through the lens of both gamer and system creator, so the contrast naturaly aligns with closed-loop game design well.
+
+AI was effective in this phase not because it “designed” the game for me, but because it helped me **externalize and test mental models quickly**. 
+
+---
+
+## Mechanics & Tradeoffs
+
+The first iteration was naive by design: one sprite, damage applied, health decreased. 
+
+![Purple Box](/blog/ai-game-design/purple-box.png)
+
+It worked but admittedly -- it was boring. That was expected. Early systems are almost always brittle and uninteresting, and the real value at this stage was simply being able to *see* the loop in action. AI helped in very concrete ways -- improving basic scripts, wiring state variables, explaining engine-specific quirks, deep diving into the *why* behind the godot systems model and validating that my mental model matched the system’s actual behavior. At this stage, AI felt like a junior engineer pairing with me: fast, literal, and genuinely useful.
+
+The game became interesting when I introduced **tradeoffs**. Coffee stopped being a pure heal and instead restored morale temporarily, lost effectiveness with repeated use, and increased long-term burnout risk. Defensive mechanics reduced incoming damage but slowed progress, while offensive actions sped things up at the cost of increased stress. This is where AI also really shined. I could ask questions like, “What’s a simple way to model diminishing returns?”, “How should this feedback surface visually?”, or “How do I prevent players from optimizing the fun out of the system?” These weren’t syntax questions—they were questions about **system behavior**. AI helped me explore multiple approaches quickly, from linear versus exponential decay to cooldowns versus resource exhaustion, and visible versus hidden states. I could then play with each approach in a fast prototype sandbox environment and use my Human judgement as a gamer on what was fun and what wasn't. 
+
+
+
+A good example of this was a shield break mechanic. I knew I wanted a progressive shield breaking mechanic that showed the shields at different levels of decay before breaking -- from blue to yellow to red. I asked the chatbot to give me the shades of shields, help me design the mechanic, and threw it into the game inside of an hour. I then got to see exactly how that behaved in the environment and make adjustments from there.
+
+![Shields](/blog/ai-game-design/shields.png)
+
+
+The feedback loop tightened, playtesting became faster, and the game finally became *fun*.
+
+---
+
+## Puzzle Complexity
+
+One unexpected area where AI also excelled was **puzzle escalation**. I built simple puzzle rooms around toggle-based mechanics—switches representing conflicting priorities, bugs representing compounding problems, and limited time or attention as a constraint. Manually designing escalation curves for systems like this is tedious and error-prone.
+
+![Puzzle-Toggle](/blog/ai-game-design/puzzle-toggle.png)
+
+Here, AI acted like an assistant: implementing permutations, identifying degenerate cases, and helping generate variants that were “just complex enough” to remain interesting without tipping into chaos. It was a good back and forth here; with each interation of the puzzle rooms getting polished with each pass of redesign. Importantly, I didn’t blindly accept its outputs. I treated them as *inputs to my judgment*, not pre-made decisions. When the rooms were completed, they felt more alive because of the back and forth we had; and the live testing gave us immediate feedback on wether or not a bug squash *felt* good, or if the hammer smashing down was the correct speed or hit factor. Add a little sprite shake here, a little bug guts or switch lighting there, and we were on a roll!
+
+![Puzzle-Bug](/blog/ai-game-design/puzzle-bug.png)
+
+AI expanded the design space, but I still chose what felt right. At this stage, the collaboration felt ideal.
+
+---
+
+## Outpacing Ownership
+
+Then something subtle changed.
+
+As I leaned more heavily on AI, iteration became *too fast*. I could generate new mechanics instantly, refactor systems wholesale, and redesign puzzles without friction. Paradoxically, the project started to feel less like *mine*. A new system suggestion would warrant a complete refactor; and I noticed myself pay less and less attention to the underlying mechanic shifts. At first I was leaning in and learning a lot. Asking question after question until I understood the changes the system wanted to make. After a few days of this pace my brain started to slow down, but the desire to see a finished project strengthened. Instead of taking a break and coming back fresh; I pushed the commits quicker and quicker without internalizing the changes that were being made. This phase results in great progress, but also in just as many bugs and debugging sessions. As I loosened my grip on the design of the actual system, and gave more agency to the AI bot helping; I started to loose my attachment and joy of the project itself.
+
+Not because AI was “doing the work,” but because **I was skipping the struggle that creates the emotional attachment**.
+
+## Friction is Necessary
+
+I've learned that some friction is necessary. The moments that felt most rewarding weren’t when things worked immediately -- they were when a mechanic failed and I debugged it, when a system behaved unexpectedly and I traced why, or when a design decision forced a compromise. Those moments build intuition and ownership. When AI smoothed them away, I lost that connection to shape how the system evolved. I felt as if I were trying to keep up with a train that was further and further down the track and gaining speed. I could still keep pace if I sprinted, however the rate of change outpaced my brain's ability to absorb the information.  
+
+In operations, we talk about false efficiency -- systems that look productive while undermining long-term outcomes. I experienced the creative equivalent in this project. By optimizing for speed and output, I unintentionally removed the tension, uncertainty, and personal problem-solving that was the glue holding together the fun. The game improved mechanically, but my emotional *engagement* declined. I found myself making changes I didn’t care about, and when something broke, I felt annoyance instead of curiosity. The time between my development sessions increased, and eventually I let other life priorities take over.
+
+I realized something important during this project:
+
+> Friction isn’t always bad.  
+> Sometimes it’s the glue that binds you to the work.
+
+---
+
+## Lessons Learned
+
+Eventually, I stopped working on the project. At first, that felt like failure. With some distance, it's become clear it was a **useful signal**. I learned where AI can accelerate meaningful progress for designing systems, where it erodes creative ownership, and where my personal balance point lives between these two places. AI was invaluable during exploration, prototyping, early iteration, and complexity generation. In the sandbox where we're throwing the spaggetti at the wall is a perfect place for the AI systems to live. It became harmful when it removed too much cognitive load, bypassed natural human learning loops, or replaced my own emotional *engagement* with mechanical *throughput*.
+
+**This distinction matters for anyone building with AI.**
+
+It should not be used as a replacement for struggle, a shortcut around understanding, or a way to avoid sitting with broken systems.
+
+The goal isn’t maximum velocity.  
+The goal is **sustainable momentum with creative ownership intact**.
+
+This experience reshaped how I approach AI professionally. I’m now more intentional about where automation helps learning, but also where it came harm human intuiton. Speed hides brittleness in our own systems thinking. In support, operations, and engineering, the same pattern applies: automate toil, preserve judgment, and protect feedback loops. Creative projects just makes those tradeoffs more visible and emotional in a shorter period of time.
+
+---
+
+## Final Reflection
+
+Building a game with AI taught me more than I expected -- not about games, but about systems, learning, and motivation.
+
+AI helped me ship something I wouldn’t have otherwise built. It also showed me where using it too aggressively pulled me away from the work itself.
+
+That tension is the real lesson I’m still sitting with.
+Sometimes the struggle isn’t something to eliminate.
+
+Sometimes it’s the point.
+
+---
+
+## References
+
+[Burnt Out Game]
+
+[Burnt Out Game]: https://github.com/nathanhitchcock/BurntOut "Burnt Out Game"
+
+[Godot Gaming Engine]
+
+[Godot Gaming Engine]: https://godotengine.org "Godot"
+
+[Commodore64]
+
+[Commodore64]: https://en.wikipedia.org/wiki/Commodore_64 "Commodore64"
+
+
