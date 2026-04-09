@@ -121,20 +121,26 @@ function getMDXData(postsDir: string) {
   }
 
   // Build post objects
-  const posts = Array.from(bySlug.entries()).map(([slug, filePath]) => {
-    const { metadata, content } = readMDXFile(filePath);
-    const stats = readingTime(content);
+  const posts = Array.from(bySlug.entries())
+    .map(([slug, filePath]) => {
+      const { metadata, content } = readMDXFile(filePath);
+      if (!metadata?.title || !metadata?.publishedAt) {
+        return null;
+      }
 
-    return {
-      metadata: {
-        ...metadata,
-        readingTime: stats.text, // e.g. "5 min read"
-        words: stats.words,
-      },
-      slug,
-      content,
-    };
-  });
+      const stats = readingTime(content);
+
+      return {
+        metadata: {
+          ...metadata,
+          readingTime: stats.text, // e.g. "5 min read"
+          words: stats.words,
+        },
+        slug,
+        content,
+      };
+    })
+    .filter((post): post is NonNullable<typeof post> => Boolean(post));
 
   return posts;
 }

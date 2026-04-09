@@ -17,7 +17,7 @@ export async function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata({ params }: { params: Params | Promise<Params> }) {
+export async function generateMetadata({ params }: { params: Promise<Params> }) {
   // In Next 15+, dynamic params may be a Promise; unwrap before use
   const { slug } = await params
   let post = getBlogPosts().find((post) => post.slug === slug)
@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: { params: Params | Promise<Pa
   }
 }
 
-export default async function Blog({ params }: { params: Params | Promise<Params> }) {
+export default async function Blog({ params }: { params: Promise<Params> }) {
   // In Next 15+, dynamic params may be a Promise; unwrap before use
   const { slug } = await params
   let post = getBlogPosts().find((post) => post.slug === slug)
