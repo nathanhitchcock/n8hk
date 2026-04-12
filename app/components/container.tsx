@@ -11,10 +11,10 @@ export function Container({
   size = 'narrow',
   className = '',
 }: ContainerProps) {
-  const width = size === 'wide' ? 'max-w-xl lg:max-w-5xl' : 'max-w-xl'
+  const width = size === 'wide' ? 'max-w-6xl' : 'max-w-4xl'
 
   return (
-    <div className={`${width} w-full mx-auto px-2 ${className}`}>
+    <div className={`${width} w-full mx-auto px-3 md:px-5 ${className}`}>
       {children}
     </div>
   )

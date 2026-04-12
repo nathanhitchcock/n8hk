@@ -5,7 +5,7 @@ export function BlogPosts() {
   const allBlogs = getBlogPosts()
 
   return (
-    <div>
+    <div className="space-y-4">
       {allBlogs
         .sort((a, b) => {
           if (new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)) {
@@ -17,21 +17,25 @@ export function BlogPosts() {
           <Link
             key={post.slug}
             href={`/blog/${post.slug}`}
-            className="block mb-6"
+            className="post-card surface-card enter-rise group block rounded-2xl border px-5 py-4 shadow-sm transition hover:-translate-y-0.5 hover:border-teal-400/50 hover:shadow-md"
           >
-            {/* Title first */}
-            <p className="text-neutral-900 dark:text-neutral-100 tracking-tight font-medium">
+            <p className="text-strong text-lg tracking-tight font-semibold transition-colors group-hover:text-teal-700">
               {post.metadata.title}
             </p>
 
-            {/* Meta second: read time · date */}
-            <p className="mt-1 text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
+            <p className="text-muted mt-2 text-xs uppercase tracking-[0.14em]">
               {post.metadata.readingTime
                 ? post.metadata.readingTime.replace(' read', '')
                 : null}
               {post.metadata.readingTime ? ' · ' : null}
               {formatDate(post.metadata.publishedAt, false)}
             </p>
+
+            {post.metadata.summary ? (
+              <p className="text-muted mt-2 line-clamp-2 text-sm">
+                {post.metadata.summary}
+              </p>
+            ) : null}
           </Link>
         ))}
     </div>

@@ -3,6 +3,7 @@ import { CustomMDX } from 'app/components/mdx'
 import { formatDate, getBlogPosts } from 'app/blog/utils'
 import { baseUrl } from 'app/sitemap'
 import { TableOfContents } from 'app/components/toc'
+import { getTocItems } from 'app/components/toc-utils'
 import { Container } from 'app/components/container'
 // no React.use needed; prefer async/await for Promise params
 
@@ -71,84 +72,30 @@ export default async function Blog({ params }: { params: Promise<Params> }) {
   const tocItems = getTocItems(post.content)
 
   return (
-    <Container size="wide">
-      {/* ... JSON-LD script stays as-is... */}
-
-      <h1 className="title font-semibold text-3xl tracking-tight">
-        {post.metadata.title}
-      </h1>
-
-      <div className="mt-3 mb-8 text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
-        {post.metadata.readingTime
-          ? `${post.metadata.readingTime.replace(' read', '')}`
-          : null}
-        {post.metadata.readingTime ? ' · ' : null}
-        {formatDate(post.metadata.publishedAt)}
-      </div>
-
+    <Container size="wide" className="pb-4 md:pb-8">
+      <section className="surface-card enter-rise mb-8 md:mb-10 rounded-3xl border px-6 py-8 md:px-8 md:py-10 shadow-sm">
+        <p className="text-xs uppercase tracking-[0.18em] text-teal-700">Article</p>
+        <h1 className="title text-strong mt-3 font-semibold text-3xl tracking-tight md:text-4xl">
+          {post.metadata.title}
+        </h1>
+        <div className="text-muted mt-4 text-xs uppercase tracking-[0.14em]">
+          {post.metadata.readingTime
+            ? `${post.metadata.readingTime.replace(' read', '')}`
+            : null}
+          {post.metadata.readingTime ? ' · ' : null}
+          {formatDate(post.metadata.publishedAt)}
+        </div>
+      </section>
 
       <div className="lg:grid lg:grid-cols-12 lg:gap-12">
-        <article className="prose lg:prose-lg xl:prose-xl lg:col-span-9">
+        <div className="order-1 mb-5 lg:mb-0 lg:order-2 lg:col-span-4 lg:pl-3">
+          <TableOfContents items={tocItems} />
+        </div>
+
+        <article className="order-2 surface-card prose enter-wash lg:prose-lg lg:order-1 lg:col-span-8 rounded-3xl border px-6 py-7 shadow-sm md:px-10 md:py-10">
           <CustomMDX source={post.content} />
         </article>
-
-        <aside className="hidden md:block md:col-span-3 md:pl-6 lg:pl-8">
-          <div className="sticky top-24 border-l border-neutral-200 dark:border-neutral-800 pl-4">
-            <TableOfContents items={tocItems} />
-          </div>
-        </aside>
       </div>
-
     </Container>
   )
-}
-
-function slugify(str: string) {
-  return str
-    .toString()
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, '-')
-    .replace(/&/g, '-and-')
-    .replace(/[^\w\-]+/g, '')
-    .replace(/\-\-+/g, '-')
-}
-
-// Very small “good enough” markdown heading parser for MDX text.
-// Extracts ## and ###, ignores code fences.
-function getTocItems(mdx: string) {
-  const lines = mdx.split('\n')
-  const items: { id: string; text: string }[] = []
-
-  let inCodeBlock = false
-
-  for (const line of lines) {
-    const trimmed = line.trim()
-
-    if (trimmed.startsWith('```') || trimmed.startsWith('~~~')) {
-      inCodeBlock = !inCodeBlock
-      continue
-    }
-    if (inCodeBlock) continue
-
-    // Match ONLY ## Heading
-    const match = /^(#{2})\s+(.+)$/.exec(trimmed)
-    if (!match) continue
-
-    let text = match[2]
-      .replace(/`([^`]+)`/g, '$1')
-      .replace(/\*\*([^*]+)\*\*/g, '$1')
-      .replace(/\*([^*]+)\*/g, '$1')
-      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-      .trim()
-
-    if (!text) continue
-
-    items.push({
-      id: slugify(text),
-      text,
-    })
-  }
-
-  return items
 }

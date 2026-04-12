@@ -1,7 +1,7 @@
 import './global.css'
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
-import { Inter, IBM_Plex_Mono } from 'next/font/google'
+import { Manrope, IBM_Plex_Mono } from 'next/font/google'
 import { Navbar } from './components/nav'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
@@ -10,7 +10,7 @@ import { baseUrl } from './sitemap'
 import { Container } from 'app/components/container'
 
 /* Fonts */
-const inter = Inter({
+const manrope = Manrope({
   subsets: ['latin'],
   variable: '--font-sans',
   display: 'swap',
@@ -64,27 +64,38 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      className={cx(
-        'text-black bg-white dark:text-white dark:bg-black',
-        inter.variable,
-        plexMono.variable
-      )}
+      suppressHydrationWarning
+      className={cx('bg-app text-app-fg', manrope.variable, plexMono.variable)}
     >
-      <body className="antialiased mx-4 mt-8 lg:mx-auto">
-        <main className="flex-auto min-w-0 mt-6 flex flex-col">
-          {/* Nav (always wide) */}
+      <body className="app-surface antialiased">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(() => {
+  try {
+    const key = 'theme-preference'
+    const saved = localStorage.getItem(key) || 'system'
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const theme = saved === 'dark' || saved === 'light'
+      ? saved
+      : (systemDark ? 'dark' : 'light')
+    const root = document.documentElement
+    root.classList.toggle('theme-dark', theme === 'dark')
+    root.classList.toggle('theme-light', theme === 'light')
+  } catch (_) {}
+})()`,
+          }}
+        />
+        <main className="flex-auto min-w-0 pt-6 pb-12 flex flex-col">
           <Container size="wide" className="w-full">
-            <div className="border-b border-neutral-200/80 dark:border-neutral-700/70 pb-4 mb-8">
+            <div className="glass-panel border-b pb-4 mb-10 px-3 md:px-5 rounded-2xl">
               <Navbar />
             </div>
           </Container>
 
-          {/* Page content (each page decides narrow/wide) */}
           {children}
 
-          {/* Footer (always wide) */}
           <Container size="wide" className="w-full">
-            <div className="mt-12">
+            <div className="mt-16 glass-panel rounded-2xl px-4 md:px-6 py-2">
               <Footer />
             </div>
           </Container>
