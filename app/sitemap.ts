@@ -1,4 +1,6 @@
 import { getBlogPosts } from 'app/blog/utils'
+import { getFieldNotes } from 'app/field-notes/utils'
+import { getPlaybookEntries } from 'app/playbook/utils'
 
 export const baseUrl =
   process.env.NEXT_PUBLIC_SITE_URL || 'https://n8hk.vercel.app'
@@ -9,10 +11,20 @@ export default async function sitemap() {
     lastModified: post.metadata.publishedAt,
   }))
 
-  let routes = ['', '/blog'].map((route) => ({
+  let fieldNotes = getFieldNotes().map((note) => ({
+    url: `${baseUrl}/field-notes/${note.slug}`,
+    lastModified: note.metadata.publishedAt,
+  }))
+
+  let playbook = getPlaybookEntries().map((entry) => ({
+    url: `${baseUrl}/playbook/${entry.slug}`,
+    lastModified: entry.metadata.publishedAt,
+  }))
+
+  let routes = ['', '/blog', '/field-notes', '/playbook'].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date().toISOString().split('T')[0],
   }))
 
-  return [...routes, ...blogs]
+  return [...routes, ...blogs, ...fieldNotes, ...playbook]
 }
