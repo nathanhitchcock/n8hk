@@ -43,22 +43,27 @@ export async function generateMetadata({ params }: { params: Promise<Params> }) 
 
 export default async function PlaybookEntryPage({ params }: { params: Promise<Params> }) {
   const { slug } = await params
-  const entries = getPlaybookEntries().sort((a, b) => a.metadata.step - b.metadata.step)
-  const entry = entries.find((item) => item.slug === slug)
+  const allEntries = getPlaybookEntries()
+  const entry = allEntries.find((item) => item.slug === slug)
 
   if (!entry) {
     notFound()
   }
 
-  const currentIndex = entries.findIndex((item) => item.slug === entry.slug)
-  const nextEntry = entries[currentIndex + 1]
+  const frameworkName = entry.metadata.framework || 'Framework'
+  const frameworkEntries = allEntries
+    .filter((item) => (item.metadata.framework || 'Framework') === frameworkName)
+    .sort((a, b) => a.metadata.step - b.metadata.step)
+
+  const currentIndex = frameworkEntries.findIndex((item) => item.slug === entry.slug)
+  const nextEntry = frameworkEntries[currentIndex + 1]
   const tocItems = getTocItems(entry.content)
 
   return (
     <Container size="wide" className="pb-4 md:pb-8">
       <section className="surface-card enter-rise mb-8 md:mb-10 rounded-3xl border px-6 py-8 md:px-8 md:py-10 shadow-sm">
         <p className="text-xs uppercase tracking-[0.18em] text-teal-700">
-          How to Grow a High-Performing Team ·
+          {frameworkName} ·
           {' '}
           Step {entry.metadata.step}
           {entry.metadata.phase ? ` · ${entry.metadata.phase}` : ''}

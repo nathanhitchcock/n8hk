@@ -7,13 +7,38 @@ type Metadata = {
   publishedAt: string
   summary: string
   step: number
+  framework?: string
+  frameworkOrder?: number
   phase?: string
   tags?: string[]
   readingTime?: string
   words?: number
 }
 
+export type PlaybookEntry = {
+  metadata: Metadata
+  slug: string
+  content: string
+}
+
+export type FrameworkGroup = {
+  name: string
+  slug: string
+  order: number
+  entries: PlaybookEntry[]
+}
+
+export const DEFAULT_FRAMEWORK = 'How to Grow a High-Performing Team'
+
 const MAX_TAGS = 3
+
+export function frameworkToSlug(name: string) {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+}
 
 function parseTags(value: string) {
   const normalized = value
@@ -62,10 +87,17 @@ function parseFrontmatter(fileContent: string) {
       return
     }
 
+    if (key.trim() === 'frameworkOrder') {
+      metadata.frameworkOrder = Number(value)
+      return
+    }
+
     ;(metadata as Record<string, string | number | string[]>)[key.trim()] = value
   })
 
   metadata.tags = metadata.tags ?? []
+  metadata.framework = metadata.framework ?? DEFAULT_FRAMEWORK
+  metadata.frameworkOrder = metadata.frameworkOrder ?? 1
 
   return { metadata: metadata as Metadata, content }
 }
@@ -153,6 +185,40 @@ function getMDXData(postsDir: string) {
 
 export function getPlaybookEntries() {
   return getMDXData(path.join(process.cwd(), 'app', 'playbook', 'posts'))
+}
+
+export function getFrameworkGroups(): FrameworkGroup[] {
+  const entries = getPlaybookEntries()
+
+  return Object.values(
+    entries.reduce(
+      (acc, entry) => {
+        const name = entry.metadata.framework || DEFAULT_FRAMEWORK
+        if (!acc[name]) {
+          acc[name] = {
+            name,
+            slug: frameworkToSlug(name),
+            order: entry.metadata.frameworkOrder ?? 99,
+            entries: [] as PlaybookEntry[],
+          }
+        }
+
+        acc[name].entries.push(entry)
+        return acc
+      },
+      {} as Record<string, FrameworkGroup>
+    )
+  )
+    .sort((a, b) => a.order - b.order || a.name.localeCompare(b.name))
+    .map((framework) => ({
+      ...framework,
+      entries: framework.entries.sort((a, b) => a.metadata.step - b.metadata.step),
+    }))
+}
+
+export function getFrameworkGroupBySlug(frameworkSlug: string): FrameworkGroup | null {
+  const frameworks = getFrameworkGroups()
+  return frameworks.find((framework) => framework.slug === frameworkSlug) ?? null
 }
 
 export function formatDate(date: string) {
