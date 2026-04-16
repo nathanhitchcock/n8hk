@@ -375,6 +375,12 @@ table th {
   font-size: 0.95rem;
 }
 
+.callout-warning {
+  background: #fffbeb;
+  border-left-color: #d97706;
+  color: #92400e;
+}
+
 .callout-title {
   display: flex;
   align-items: center;
@@ -388,10 +394,36 @@ table th {
   font-family: var(--font-mono);
 }
 
+.callout-warning .callout-title {
+  color: #b45309;
+}
+
 .callout code {
   background: var(--callout-code-bg);
   padding: 0.15rem 0.3rem;
   border-radius: 4px;
+}
+
+html.theme-dark .callout-warning {
+  background: rgba(217, 119, 6, 0.16);
+  border-left-color: #f59e0b;
+  color: #fde68a;
+}
+
+html.theme-dark .callout-warning .callout-title {
+  color: #fbbf24;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not(.theme-light) .callout-warning {
+    background: rgba(217, 119, 6, 0.16);
+    border-left-color: #f59e0b;
+    color: #fde68a;
+  }
+
+  html:not(.theme-light) .callout-warning .callout-title {
+    color: #fbbf24;
+  }
 }
 
 @keyframes rise-fade {

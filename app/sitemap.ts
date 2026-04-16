@@ -17,11 +17,11 @@ export default async function sitemap() {
   }))
 
   let playbook = getPlaybookEntries().map((entry) => ({
-    url: `${baseUrl}/playbook/${entry.slug}`,
+    url: `${baseUrl}/frameworks/${entry.slug}`,
     lastModified: entry.metadata.publishedAt,
   }))
 
-  let routes = ['', '/blog', '/field-notes', '/playbook'].map((route) => ({
+  let routes = ['', '/blog', '/field-notes', '/frameworks', '/toolbox', '/toolbox/staffing-calculator'].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date().toISOString().split('T')[0],
   }))
