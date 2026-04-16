@@ -52,6 +52,9 @@ export default async function FrameworkDetailPage({ params }: FrameworkPageProps
     { label: 'Senior -> Principal', range: 'Steps 6-8' },
   ]
 
+  const progressionGridClass =
+    group.entries.length <= 3 ? 'grid-cols-3' : group.entries.length === 8 ? 'grid-cols-8' : 'grid-cols-6'
+
   return (
     <Container size="narrow" className="pb-4 md:pb-6">
       <section className="surface-card enter-rise mb-8 rounded-3xl border px-6 py-7 shadow-sm md:mb-10 md:px-8 md:py-9">
@@ -86,7 +89,7 @@ export default async function FrameworkDetailPage({ params }: FrameworkPageProps
         )}
 
         <div className="mt-5 hidden md:block">
-          <div className={`relative grid gap-3 ${group.entries.length === 8 ? 'grid-cols-8' : 'grid-cols-6'}`}>
+          <div className={`relative grid gap-3 ${progressionGridClass}`}>
             <div className="pointer-events-none absolute left-6 right-6 top-4 h-px bg-teal-200/80 dark:bg-teal-900/80" />
             {group.entries.map((entry) => (
               <Link

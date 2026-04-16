@@ -37,7 +37,7 @@ export default function FrameworksPage() {
         </h1>
         <p className="text-muted mt-3 max-w-2xl text-sm md:text-base">
           Tactical, step-by-step systems for building better teams and stronger engineering leaders.
-          Start with the flagship framework below.
+          Start with the featured framework, then explore the full library.
         </p>
       </section>
 
@@ -87,6 +87,29 @@ export default function FrameworksPage() {
           )}
         </div>
       </Link>
+
+      <section className="mt-6 space-y-3 md:mt-7">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal-700">All Frameworks</p>
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+          {frameworks.map((framework) => (
+            <Link
+              key={framework.slug}
+              href={`/frameworks/framework/${framework.slug}`}
+              className="surface-card block rounded-2xl border px-5 py-4 shadow-sm transition-all hover:border-teal-300 hover:shadow-md"
+            >
+              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-teal-700">
+                Framework {framework.order}
+              </p>
+              <h2 className="text-strong mt-1 text-base font-semibold tracking-tight md:text-lg">
+                {framework.name}
+              </h2>
+              <p className="text-muted mt-1.5 text-xs md:text-sm">
+                {framework.entries.length} {framework.entries.length === 1 ? 'step' : 'steps'}
+              </p>
+            </Link>
+          ))}
+        </div>
+      </section>
     </Container>
   )
 }

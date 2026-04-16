@@ -1,0 +1,7 @@
+{
+  "/toolbox/page": "app/toolbox/page.js",
+  "/frameworks/framework/[framework]/page": "app/frameworks/framework/[framework]/page.js",
+  "/frameworks/page": "app/frameworks/page.js",
+  "/frameworks/[slug]/page": "app/frameworks/[slug]/page.js",
+  "/toolbox/one-three-one-worksheet/page": "app/toolbox/one-three-one-worksheet/page.js"
+}
