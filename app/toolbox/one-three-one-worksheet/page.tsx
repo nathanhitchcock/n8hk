@@ -30,6 +30,7 @@ export default function OneThreeOneWorksheetPage() {
   const [nextStep, setNextStep] = useState('')
   const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>('idle')
   const [isHydrated, setIsHydrated] = useState(false)
+  const [showExample, setShowExample] = useState(false)
 
   useEffect(() => {
     try {
@@ -193,6 +194,37 @@ export default function OneThreeOneWorksheetPage() {
       setTimeout(() => setCopyState('idle'), 2200)
     }
   }
+
+  const exampleText = [
+    '1-3-1 Decision Brief (Example)',
+    '',
+    '1) Problem',
+    '- Statement: Sprint commitments are slipping because critical incidents are interrupting planned engineering work.',
+    '- Why now: Customer escalations increased 30% this month and roadmap dates are at risk for Q2.',
+    '- Success condition: Restore >85% sprint predictability while reducing incident resolution time by 20%.',
+    '',
+    '2) Three Options',
+    'Option 1: Keep current structure and add one on-call contractor',
+    '- Upside: Fastest to implement with minimal process change.',
+    '- Risk: Treats symptoms and may not improve root-cause reliability.',
+    '- Cost/Time: 2 weeks and contractor budget increase.',
+    '',
+    'Option 2: Create a rotating reliability squad from existing team',
+    '- Upside: Builds internal reliability ownership and reduces interruptions to product squads.',
+    '- Risk: Temporary feature velocity dip while roles stabilize.',
+    '- Cost/Time: 1 sprint to launch and tune.',
+    '',
+    'Option 3: Pause roadmap for one sprint and execute reliability reset',
+    '- Upside: Highest chance to remove incident backlog quickly.',
+    '- Risk: Stakeholder frustration from visible roadmap delay.',
+    '- Cost/Time: 1 full sprint of opportunity cost.',
+    '',
+    '3) Recommendation',
+    '- Recommended option: Option 2',
+    '- Why: Best long-term tradeoff between delivery continuity and reliability improvement.',
+    '- Owner: Engineering Manager, Platform Team',
+    '- Immediate next step: Publish squad roster and operating charter by Friday; review metrics after 2 weeks.',
+  ].join('\n')
 
   const clearWorksheet = () => {
     setProblem('')
@@ -402,6 +434,13 @@ export default function OneThreeOneWorksheetPage() {
           </button>
           <button
             type="button"
+            onClick={() => setShowExample((prev) => !prev)}
+            className="inline-flex rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm font-medium text-strong transition-colors hover:border-teal-300"
+          >
+            {showExample ? 'Hide Example Output' : 'Show Example Output'}
+          </button>
+          <button
+            type="button"
             onClick={clearWorksheet}
             className="inline-flex rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm font-medium text-strong transition-colors hover:border-red-300 hover:text-red-700"
           >
@@ -421,6 +460,13 @@ export default function OneThreeOneWorksheetPage() {
           <p className="callout-title">Preview</p>
           <pre className="whitespace-pre-wrap text-xs leading-relaxed">{exportText}</pre>
         </div>
+
+        {showExample && (
+          <div className="mt-4 callout text-xs">
+            <p className="callout-title">Example Filled Output</p>
+            <pre className="whitespace-pre-wrap text-xs leading-relaxed">{exampleText}</pre>
+          </div>
+        )}
       </section>
     </Container>
   )

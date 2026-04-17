@@ -47,6 +47,10 @@ export default function ToolboxPage() {
             and 1 accountable recommendation you can copy into Slack or docs.
           </p>
 
+          <p className="text-muted mt-2 text-xs md:text-sm">
+            Best used when: a decision is getting fuzzy. Time: 5-8 minutes.
+          </p>
+
           <div className="mt-4 flex flex-wrap gap-2">
             <span className="rounded-full border border-teal-200/80 bg-teal-50 px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.08em] text-teal-800 dark:border-teal-900 dark:bg-teal-950/40 dark:text-teal-200">
               Decision Quality
@@ -84,6 +88,10 @@ export default function ToolboxPage() {
           <p className="text-muted mt-2 text-sm md:text-base">
             Estimate staffing, hiring runway, and delivery risk using demand, peak-load buffers,
             throughput, attrition, and hiring lead-time assumptions.
+          </p>
+
+          <p className="text-muted mt-2 text-xs md:text-sm">
+            Best used when: opening reqs or rebalancing team capacity. Time: 3-5 minutes.
           </p>
 
           <div className="mt-4 flex flex-wrap gap-2">
