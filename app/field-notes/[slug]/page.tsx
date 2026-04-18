@@ -5,6 +5,8 @@ import { baseUrl } from 'app/sitemap'
 import { Container } from 'app/components/container'
 import { TableOfContents } from 'app/components/toc'
 import { getTocItems } from 'app/components/toc-utils'
+import { getPlaybookEntries } from 'app/playbook/utils'
+import Link from 'next/link'
 
 type Params = { slug: string }
 
@@ -57,6 +59,11 @@ export default async function FieldNotePage({ params }: { params: Promise<Params
 
   const tocItems = getTocItems(note.content)
 
+  const frameworkStepSlug = note.metadata.frameworkStep
+  const linkedStep = frameworkStepSlug
+    ? getPlaybookEntries().find((e) => e.slug === frameworkStepSlug)
+    : null
+
   return (
     <Container size="wide" className="pb-4 md:pb-8">
       <section className="surface-card enter-rise mb-8 md:mb-10 rounded-3xl border px-6 py-8 md:px-8 md:py-10 shadow-sm">
@@ -86,6 +93,17 @@ export default async function FieldNotePage({ params }: { params: Promise<Params
               </span>
             ))}
           </div>
+        )}
+        {linkedStep && (
+          <p className="mt-5 text-xs text-muted">
+            Filed under{' '}
+            <Link
+              href={`/frameworks/${linkedStep.slug}`}
+              className="text-teal-700 underline-offset-2 hover:underline dark:text-teal-400"
+            >
+              Step {linkedStep.metadata.step}: {linkedStep.metadata.title}
+            </Link>
+          </p>
         )}
       </section>
 

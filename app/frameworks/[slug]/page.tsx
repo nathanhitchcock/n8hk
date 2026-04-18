@@ -5,6 +5,8 @@ import { Container } from 'app/components/container'
 import { TableOfContents } from 'app/components/toc'
 import { getTocItems } from 'app/components/toc-utils'
 import { formatDate, getPlaybookEntries } from 'app/playbook/utils'
+import { getFieldNotes } from 'app/field-notes/utils'
+import Link from 'next/link'
 
 type Params = { slug: string }
 
@@ -59,6 +61,10 @@ export default async function FrameworkEntryPage({ params }: { params: Promise<P
   const nextEntry = frameworkEntries[currentIndex + 1]
   const tocItems = getTocItems(entry.content)
 
+  const linkedNotes = getFieldNotes().filter(
+    (note) => note.metadata.frameworkStep === entry.slug
+  )
+
   return (
     <Container size="wide" className="pb-4 md:pb-8">
       <section className="surface-card enter-rise mb-8 rounded-3xl border px-6 py-8 shadow-sm md:mb-10 md:px-8 md:py-10">
@@ -98,6 +104,28 @@ export default async function FrameworkEntryPage({ params }: { params: Promise<P
 
         <article className="order-2 surface-card prose enter-wash lg:prose-lg lg:order-1 lg:col-span-8 rounded-3xl border px-6 py-7 shadow-sm md:px-10 md:py-10">
           <CustomMDX source={entry.content} />
+
+          {linkedNotes.length > 0 && (
+            <>
+              <hr className="my-8" />
+              <div className="not-prose">
+                <p className="text-xs uppercase tracking-[0.18em] text-teal-700 mb-3">In Practice</p>
+                <ul className="space-y-2">
+                  {linkedNotes.map((note) => (
+                    <li key={note.slug}>
+                      <Link
+                        href={`/field-notes/${note.slug}`}
+                        className="text-sm text-strong hover:text-teal-700 dark:hover:text-teal-400 transition-colors"
+                      >
+                        {note.metadata.title}
+                        <span className="text-muted ml-2 text-xs">{note.metadata.summary}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </>
+          )}
 
           <hr className="my-8" />
           {nextEntry ? (

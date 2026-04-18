@@ -8,6 +8,7 @@ type Metadata = {
   summary: string;
   category?: string;
   tags?: string[];
+  frameworkStep?: string;
   readingTime?: string;
   words?: number;
 };
