@@ -57,7 +57,7 @@ export function ThemeToggle() {
       aria-label="Theme preference"
       className="theme-switch-shell control-border rounded-xl border p-1"
     >
-      {(['light', 'dark', 'system'] as const).map((option) => (
+      {(['light', 'dark'] as const).map((option) => (
         <button
           key={option}
           type="button"

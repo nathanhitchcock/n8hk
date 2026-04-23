@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { ThemeToggle } from './theme-toggle'
 
 const navItems = {
   '/': { name: 'Home' },
@@ -7,13 +6,13 @@ const navItems = {
   '/field-notes': { name: 'Field Notes' },
   '/blueprints': { name: 'Blueprints' },
   '/toolbox': { name: 'Toolbox' },
-  '/rss.xml': { name: 'RSS' },
+  '/investments': { name: 'Investments' },
 }
 
 export function Navbar() {
   return (
     <div className="enter-wash lg:sticky lg:top-6">
-      <nav id="nav" className="flex items-center justify-between gap-4 py-3">
+      <nav id="nav" className="flex items-center gap-4 py-3">
         <Link href="/" className="flex items-center gap-3">
           <span className="h-8 w-8 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-600 shadow-sm" />
           <span className="text-strong text-sm md:text-base font-semibold tracking-tight">
@@ -33,17 +32,6 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="flex items-center gap-2">
-          <ThemeToggle />
-          <a
-            href="https://github.com/nathanhitchcock"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="button-contrast hidden md:inline-flex rounded-lg px-3 py-1.5 text-sm font-medium transition"
-          >
-            Follow Work
-          </a>
-        </div>
       </nav>
     </div>
   )
