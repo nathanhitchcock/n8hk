@@ -7,8 +7,8 @@ type Metadata = {
   publishedAt: string
   summary: string
   step: number
-  framework?: string
-  frameworkOrder?: number
+  blueprint?: string
+  blueprintOrder?: number
   phase?: string
   tags?: string[]
   readingTime?: string
@@ -21,18 +21,18 @@ export type PlaybookEntry = {
   content: string
 }
 
-export type FrameworkGroup = {
+export type BlueprintGroup = {
   name: string
   slug: string
   order: number
   entries: PlaybookEntry[]
 }
 
-export const DEFAULT_FRAMEWORK = 'How to Grow a High-Performing Team'
+export const DEFAULT_BLUEPRINT = 'How to Grow a High-Performing Team'
 
 const MAX_TAGS = 3
 
-export function frameworkToSlug(name: string) {
+export function blueprintToSlug(name: string) {
   return name
     .toLowerCase()
     .replace(/[^a-z0-9\s-]/g, '')
@@ -87,8 +87,8 @@ function parseFrontmatter(fileContent: string) {
       return
     }
 
-    if (key.trim() === 'frameworkOrder') {
-      metadata.frameworkOrder = Number(value)
+    if (key.trim() === 'blueprintOrder') {
+      metadata.blueprintOrder = Number(value)
       return
     }
 
@@ -96,8 +96,8 @@ function parseFrontmatter(fileContent: string) {
   })
 
   metadata.tags = metadata.tags ?? []
-  metadata.framework = metadata.framework ?? DEFAULT_FRAMEWORK
-  metadata.frameworkOrder = metadata.frameworkOrder ?? 1
+  metadata.blueprint = metadata.blueprint ?? DEFAULT_BLUEPRINT
+  metadata.blueprintOrder = metadata.blueprintOrder ?? 1
 
   return { metadata: metadata as Metadata, content }
 }
@@ -187,18 +187,18 @@ export function getPlaybookEntries() {
   return getMDXData(path.join(process.cwd(), 'app', 'playbook', 'posts'))
 }
 
-export function getFrameworkGroups(): FrameworkGroup[] {
+export function getBlueprintGroups(): BlueprintGroup[] {
   const entries = getPlaybookEntries()
 
   return Object.values(
     entries.reduce(
       (acc, entry) => {
-        const name = entry.metadata.framework || DEFAULT_FRAMEWORK
+        const name = entry.metadata.blueprint || DEFAULT_BLUEPRINT
         if (!acc[name]) {
           acc[name] = {
             name,
-            slug: frameworkToSlug(name),
-            order: entry.metadata.frameworkOrder ?? 99,
+            slug: blueprintToSlug(name),
+            order: entry.metadata.blueprintOrder ?? 99,
             entries: [] as PlaybookEntry[],
           }
         }
@@ -206,19 +206,19 @@ export function getFrameworkGroups(): FrameworkGroup[] {
         acc[name].entries.push(entry)
         return acc
       },
-      {} as Record<string, FrameworkGroup>
+      {} as Record<string, BlueprintGroup>
     )
   )
     .sort((a, b) => a.order - b.order || a.name.localeCompare(b.name))
-    .map((framework) => ({
-      ...framework,
-      entries: framework.entries.sort((a, b) => a.metadata.step - b.metadata.step),
+    .map((blueprint) => ({
+      ...blueprint,
+      entries: blueprint.entries.sort((a, b) => a.metadata.step - b.metadata.step),
     }))
 }
 
-export function getFrameworkGroupBySlug(frameworkSlug: string): FrameworkGroup | null {
-  const frameworks = getFrameworkGroups()
-  return frameworks.find((framework) => framework.slug === frameworkSlug) ?? null
+export function getBlueprintGroupBySlug(blueprintSlug: string): BlueprintGroup | null {
+  const blueprints = getBlueprintGroups()
+  return blueprints.find((blueprint) => blueprint.slug === blueprintSlug) ?? null
 }
 
 export function formatDate(date: string) {

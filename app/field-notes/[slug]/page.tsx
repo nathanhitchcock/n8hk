@@ -59,9 +59,9 @@ export default async function FieldNotePage({ params }: { params: Promise<Params
 
   const tocItems = getTocItems(note.content)
 
-  const frameworkStepSlug = note.metadata.frameworkStep
-  const linkedStep = frameworkStepSlug
-    ? getPlaybookEntries().find((e) => e.slug === frameworkStepSlug)
+  const blueprintStepSlug = note.metadata.blueprintStep
+  const linkedStep = blueprintStepSlug
+    ? getPlaybookEntries().find((e) => e.slug === blueprintStepSlug)
     : null
 
   return (
@@ -98,7 +98,7 @@ export default async function FieldNotePage({ params }: { params: Promise<Params
           <p className="mt-5 text-xs text-muted">
             Filed under{' '}
             <Link
-              href={`/frameworks/${linkedStep.slug}`}
+              href={`/blueprints/${linkedStep.slug}`}
               className="text-teal-700 underline-offset-2 hover:underline dark:text-teal-400"
             >
               Step {linkedStep.metadata.step}: {linkedStep.metadata.title}

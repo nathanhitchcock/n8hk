@@ -8,7 +8,7 @@ type Metadata = {
   summary: string;
   category?: string;
   tags?: string[];
-  frameworkStep?: string;
+  blueprintStep?: string;
   readingTime?: string;
   words?: number;
 };

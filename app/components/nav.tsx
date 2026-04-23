@@ -5,7 +5,7 @@ const navItems = {
   '/': { name: 'Home' },
   '/blog': { name: 'Blog' },
   '/field-notes': { name: 'Field Notes' },
-  '/frameworks': { name: 'Frameworks' },
+  '/blueprints': { name: 'Blueprints' },
   '/toolbox': { name: 'Toolbox' },
   '/rss.xml': { name: 'RSS' },
 }

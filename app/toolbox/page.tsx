@@ -15,7 +15,7 @@ export default function ToolboxPage() {
           Operator Tools
         </h1>
         <p className="text-muted mt-3 max-w-2xl text-sm md:text-base">
-          Lightweight calculators and planning aids you can use alongside the frameworks.
+          Lightweight calculators and planning aids you can use alongside the blueprints.
           Built for quick decisions, not spreadsheet archaeology.
         </p>
       </section>
@@ -108,11 +108,11 @@ export default function ToolboxPage() {
         </Link>
 
         <div className="callout text-sm">
-          <p className="callout-title">Framework Link</p>
+          <p className="callout-title">Blueprint Link</p>
           <p>
             Need the deeper method behind the worksheet? Open the{' '}
-            <Link href="/frameworks/framework/1-3-1-decision-framework" className="underline underline-offset-2">
-              1-3-1 Decision Framework
+            <Link href="/blueprints/blueprint/1-3-1-decision-framework" className="underline underline-offset-2">
+              1-3-1 Decision Blueprint
             </Link>{' '}
             for the full 3-step coaching sequence.
           </p>
