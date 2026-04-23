@@ -46,8 +46,7 @@ export default function Footer() {
       </ul>
       <div className="mt-6 flex items-center justify-between">
         <p className="text-muted text-sm">
-          © {new Date().getFullYear()} MIT License. Built to share ideas on systems,
-          automation, and better work.
+          © {new Date().getFullYear()} Nathan Hitchcock
         </p>
         <ThemeToggle />
       </div>
