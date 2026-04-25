@@ -43,14 +43,7 @@ export default async function BlueprintDetailPage({ params }: BlueprintPageProps
     notFound()
   }
 
-  const showCareerMilestones =
-    group.slug === 'how-to-grow-a-junior-engineer-into-a-principal-engineer'
-
-  const careerMilestones = [
-    { label: 'Junior -> Engineer', range: 'Steps 1-2' },
-    { label: 'Engineer -> Senior', range: 'Steps 3-5' },
-    { label: 'Senior -> Principal', range: 'Steps 6-8' },
-  ]
+  const showStaffingTool = group.slug === 'how-to-grow-a-high-performing-team'
 
   const progressionGridClass =
     group.entries.length <= 3 ? 'grid-cols-3' : group.entries.length === 8 ? 'grid-cols-8' : 'grid-cols-6'
@@ -71,22 +64,6 @@ export default async function BlueprintDetailPage({ params }: BlueprintPageProps
 
       <section className="surface-card mb-6 rounded-3xl border px-5 py-6 shadow-sm md:px-7">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal-700">Progression Map</p>
-
-        {showCareerMilestones && (
-          <div className="mt-4 grid grid-cols-1 gap-2 md:grid-cols-3">
-            {careerMilestones.map((milestone) => (
-              <div
-                key={milestone.label}
-                className="rounded-xl border border-teal-200/80 bg-teal-50/70 px-3 py-2 dark:border-teal-900 dark:bg-teal-950/30"
-              >
-                <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-teal-700 dark:text-teal-300">
-                  {milestone.range}
-                </p>
-                <p className="text-strong mt-1 text-xs font-medium md:text-sm">{milestone.label}</p>
-              </div>
-            ))}
-          </div>
-        )}
 
         <div className="mt-5 hidden md:block">
           <div className={`relative grid gap-3 ${progressionGridClass}`}>
@@ -125,6 +102,25 @@ export default async function BlueprintDetailPage({ params }: BlueprintPageProps
           ))}
         </div>
       </section>
+
+      {showStaffingTool && (
+        <div className="surface-card mb-6 rounded-2xl border px-5 py-5 shadow-sm md:px-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-teal-700">Related Tool</p>
+          <p className="text-strong mt-2 text-sm font-medium">Staffing Calculator</p>
+          <p className="text-muted mt-1 text-sm">
+            Pressure-test headcount plans before opening reqs. Models flow, burst capacity, and operational risk.
+          </p>
+          <Link
+            href="/toolbox/staffing-calculator"
+            className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-teal-700 hover:text-teal-900"
+          >
+            Open the calculator
+            <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </Link>
+        </div>
+      )}
 
       <div className="space-y-3">
         {group.entries.map((entry) => (

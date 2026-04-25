@@ -391,7 +391,7 @@ export default function StaffingCalculatorPage() {
         </p>
         <div className="mt-4 flex flex-wrap gap-3">
           <Link
-            href="/frameworks/framework/how-to-grow-a-high-performing-team"
+            href="/blueprints/blueprint/how-to-grow-a-high-performing-team"
             className="inline-flex rounded-xl border px-3 py-2 text-sm font-medium text-teal-700 hover:bg-teal-50 dark:hover:bg-teal-950/30"
           >
             Open the High-Performing Team Framework

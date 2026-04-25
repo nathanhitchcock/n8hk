@@ -2,7 +2,7 @@ import { Container } from 'app/components/container'
 
 export const metadata = {
   title: 'Investments',
-  description: 'A running disclosure of my community investments — startups, real estate, and creative projects.',
+  description: 'A running disclosure of where I have skin in the game — startups, real estate, and creative projects.',
 }
 
 type Investment = {
@@ -31,12 +31,12 @@ export default function InvestmentsPage() {
       <section className="surface-card enter-rise mb-8 rounded-3xl border px-6 py-7 shadow-sm md:mb-10 md:px-8 md:py-9">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal-700">Investments</p>
         <h1 className="text-strong mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
-          Community Investments
+          Investments
         </h1>
         <p className="text-muted mt-3 max-w-2xl text-sm leading-relaxed md:text-base">
-          I invest in local startups, real estate, and creative projects. This page exists as a
-          running disclosure — if I'm in a conversation about a company or space where I have skin
-          in the game, you should know that upfront.
+          I'm in the early stages of deploying capital — focused on operators, founders, and projects
+          where I can bring more than money. This page is a running disclosure: if I have skin in
+          the game in something we're discussing, you'll know.
         </p>
       </section>
 

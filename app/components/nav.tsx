@@ -1,22 +1,19 @@
 import Link from 'next/link'
 
 const navItems = {
-  '/': { name: 'Home' },
-  '/blog': { name: 'Blog' },
-  '/field-notes': { name: 'Field Notes' },
+  '/writing': { name: 'Writing' },
   '/blueprints': { name: 'Blueprints' },
-  '/toolbox': { name: 'Toolbox' },
-  '/investments': { name: 'Investments' },
+  '/work': { name: 'Work' },
+  '/investments': { name: 'Investing' },
 }
 
 export function Navbar() {
   return (
     <div className="enter-wash lg:sticky lg:top-6">
       <nav id="nav" className="flex items-center gap-4 py-3">
-        <Link href="/" className="flex items-center gap-3">
-          <span className="h-8 w-8 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-600 shadow-sm" />
+        <Link href="/" className="flex items-center">
           <span className="text-strong text-sm md:text-base font-semibold tracking-tight">
-            n8hk.dev
+            n8hk
           </span>
         </Link>
 

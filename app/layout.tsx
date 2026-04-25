@@ -30,11 +30,11 @@ export const metadata: Metadata = {
     template: '%s | n8hk.dev',
   },
   description:
-    'Exploring the intersection of humans, automation, and AI — building systems that work smarter, not just harder.',
+    '20 years growing teams, scaling service organizations, and solving the operational problems that show up when ambition outpaces infrastructure.',
   openGraph: {
     title: 'n8hk.dev — Nathan Hitchcock',
     description:
-      'Reflections and writing on the future of work, automation, and the human side of technology.',
+      'Writing about operations, leadership, and the systems thinking that separates teams that scale from teams that stall.',
     url: baseUrl,
     siteName: 'n8hk.dev',
     locale: 'en_US',
@@ -64,27 +64,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      suppressHydrationWarning
-      className={cx('bg-app text-app-fg', manrope.variable, plexMono.variable)}
+      className={cx('bg-app text-app-fg theme-dark', manrope.variable, plexMono.variable)}
     >
       <body className="app-surface antialiased">
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(() => {
-  try {
-    const key = 'theme-preference'
-    const saved = localStorage.getItem(key) || 'system'
-    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    const theme = saved === 'dark' || saved === 'light'
-      ? saved
-      : (systemDark ? 'dark' : 'light')
-    const root = document.documentElement
-    root.classList.toggle('theme-dark', theme === 'dark')
-    root.classList.toggle('theme-light', theme === 'light')
-  } catch (_) {}
-})()`,
-          }}
-        />
         <main className="flex-auto min-w-0 pt-6 pb-12 flex flex-col">
           <Container size="wide" className="w-full">
             <div className="glass-panel border-b pb-4 mb-10 px-3 md:px-5 rounded-2xl">

@@ -1,0 +1,56 @@
+---
+title: "AviatCloud"
+publishedAt: "2026-04-24"
+summary: "Building a hosted SaaS platform for tower dispatch, device monitoring, and field operations from scratch - three people, one quarter, zero budget."
+role: "Product Owner / Architect"
+company: "Aviat Networks"
+year: "2013"
+tags: "product, saas, field operations"
+---
+
+## The Situation
+
+The line froze, and we hung up frustrated.
+
+Another truck roll out to another tower site - *not to mention about $15k in emergency service fees* - went down the drain. The line went dead as we all gripped our new reality of waiting around for another 3 hours while the technician went to the local depot to pick up the part we needed to repair the antenna at the top of a 150ft tower climb. Combine this with the emergency call we had to call off due to weather once the crew arrived last week, and these emergency truck rolls were starting to add up. Sure, we had the money to cover it under the services agreements, but we still didn't like seeing waste happen like this.
+
+We needed awareness. We needed eyes on both the situation at the towers, as well as a way to tell if it was safe to climb the tower once the crew rolled up onsite. I've seen crews climb conditions that I wouldn't dream of, but I also have a healthy fear of heights that keeps me well grounded.
+
+## The Solution
+
+What we ended up building was what would become AviatCloud, which is a hosted SaaS solution combining device monitoring, ticketing, weather tracking, and inventory management.
+
+## Our Approach
+
+We weren't product engineers. We were operators trying to do our best. As such, our budgets for building internal tooling was non-existent. Scrapping together an intern, a NOC tech, and myself we were granted 1 quarter to come up with a framework from leadership. If we didn't produce anything in that timeframe, it was back to making manual phone calls for every data query.
+
+We were using Google Maps as a matter of necessity during daily operations - we started there and loaded all of our tower sites and parts depots into a view. This gave us easy routing capabilities during our dispatches. Tying a REST API to query our inventory management system allowed us to link all of the available parts for a given parts location, as well as the site information, such as the point of contact for the site and if there were any access restrictions. Putting the two together was powerful: we could route the technician to the tower and share it with them easily, but also being able to look up where they could pick up a part if needed was gold - knowing before picking up the phone allowed us to stay ahead of the game.
+
+Halfway through our first MVP we had our usual monthly check-in from our Santa Clara office on the progress - and naturally our demos never seemed to work quite right during those early check-ins. With our team being in unknown territory there was an upfront research cost that needed to be front-ended prior to showing anything fun. Understandably - code screens don't really impress senior leadership too often and you can only say "I swear we're making progress" a few times before things get heated. We were able to show incremental progress alongside the incremental failures, and that would buy enough leeway until the next check-in.
+
+We kept building, and when the foundation was solid we added native weather overlays from the Google Maps engine - knowing whether a tower was likely to have ice before the crew started driving was invaluable.
+
+We now had a full dispatch awareness machine - but we didn't stop there.
+
+We took another look at the tower site locations. If we could pull the inventory from the parts depots, what could we do at the sites? We used Nagios for our main Network Management System (NMS); which we chose as a tradeoff from convenience because of their open source and extensible philosophy. It allowed for us to play with the available models and look at the source code in case we had to make any foundational adjustments *(we didn't - but it was nice to know the option was there)*.
+
+Linking the tower site locations to the network devices on each site now gave us an enhanced view of our infrastructure. If our telemetry - Received Signal Levels (RSLs) or Signal to Noise (SNR) ratios - took a dive we could bubble up a traffic light to the location, giving our operators a great top-level view of the whole fleet across the globe. *It was also a fantastic selling point to a prospective customer who toured our facility ;)*
+
+## What It Became
+
+Since its inception over 10 years ago, AviatCloud has been expanded to provide ordering, education, radio path designing, and an AI intelligence system all baked into a comprehensive cloud platform. I actually had no idea that it has survived this long until I sat down to write this piece and pulled up the brief from the website: [AviatCloud: Advanced Network Management Solutions](https://aviatnetworks.com/hosted-software/aviat-cloud/).
+
+The fact that this solution is still alive and kicking warms my heart - it's great to see the foundations we laid still exist and are servicing customers today!
+
+## What I Learned
+
+I learned so much during this project! I had never sat in the product owner/architect role running a product development team before - or built a product from end to end.
+
+Feedback from field technicians helped reshape the overall workflow. Our first prototypes were optimized for the desktop - it took someone actually trying to use it on a tablet at the top of a tower to make us realize we needed larger touch targets and a more finger-friendly layout. A small change in hindsight, but it determined whether the tool actually got used in the field or just sat open on a NOC screen.
+
+Viewing the system through the end users' eyes was the key. Picturing how our engineers and field technicians would log in and view the critical information they needed to be successful was the driving focus, and everything grew from there. If I had to do it all over again, I would definitely have involved them earlier in the process. We were concerned about taking people away from the ticket queues and monitoring screens, but feedback from the operators who didn't build the system made us change a few things at the end of the project and extend the timeline by a couple of weeks. If we had integrated that team earlier or provided a sandbox/feedback loop we would have saved some time and frustration.
+
+---
+
+- [Weather API overview | Google for Developers](https://developers.google.com/maps/documentation/weather/overview#features_of_the)
+- [5 Things You Should Know About RSL](https://aviatnetworks.com/tips-tricks/5-things-you-should-know-about-rsl/)

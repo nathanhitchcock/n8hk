@@ -41,7 +41,7 @@ export async function GET() {
       slug: entry.slug,
       summary: entry.metadata.summary,
       publishedAt: entry.metadata.publishedAt,
-      type: 'frameworks'
+      type: 'blueprints'
     }))
   ]
 

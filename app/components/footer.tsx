@@ -1,5 +1,3 @@
-import { ThemeToggle } from './theme-toggle'
-
 function ArrowIcon() {
   return (
     <svg
@@ -44,11 +42,10 @@ export default function Footer() {
           </a>
         </li>
       </ul>
-      <div className="mt-6 flex items-center justify-between">
+      <div className="mt-6">
         <p className="text-muted text-sm">
           © {new Date().getFullYear()} Nathan Hitchcock
         </p>
-        <ThemeToggle />
       </div>
     </footer>
   )
